@@ -51,7 +51,7 @@ export default function reducer(state = initState, action) {
     case CLEAR_TODO: {
       return {
         ...state,
-        list: []
+        list: state.list.length === 0 ? state.list : []
       };
     }
     case COMPLETE_TODO: {

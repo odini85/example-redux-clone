@@ -54,8 +54,9 @@ class Todos {
 
     const isCancelRender = (() => {
       return (
-        this.prevState.todos.list === list &&
-        this.prevState.todos.filter === filter
+        this.prevState.todos.list.length === 0 ||
+        (this.prevState.todos.list === list &&
+          this.prevState.todos.filter === filter)
       );
     })();
 
