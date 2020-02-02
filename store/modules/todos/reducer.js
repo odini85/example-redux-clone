@@ -30,13 +30,13 @@ export default function reducer(state = initState, action) {
         ...state,
         id: state.id + 1,
         list: [
-          ...state.list,
           {
             id: state.id,
             text: action.payload,
             isCompleted: false,
             timestamp: Math.floor(new Date().valueOf() / 1000)
-          }
+          },
+          ...state.list
         ]
       };
       return newState;
