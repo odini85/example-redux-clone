@@ -3,7 +3,7 @@ const ADD_TODO = "ADD_TODO";
 const REMOVE_TODO = "REMOVE_TODO";
 
 // todo store
-const todoStore = (function() {
+const todoReducer = (function() {
   // initial state
   const initState = {
     list: []
@@ -11,26 +11,34 @@ const todoStore = (function() {
   // reducer
   const reducer = function(state = initState, action) {
     switch (action.type) {
-      case ADD_TODO:
-        console.log("reducer ADD_TODO", action);
-        return {
+      case ADD_TODO: {
+        console.log("ADD_TODO before", state);
+        const newState = {
           ...state,
           list: [...state.list, action.payload]
         };
-      case REMOVE_TODO:
-        console.log("reducer REMOVE_TODO", action);
-        return {
+        console.log("ADD_TODO after", newState);
+        return newState;
+      }
+      case REMOVE_TODO: {
+        console.log("REMOVE_TODO before", state);
+        const newState = {
           ...state,
           list: state.list.filter(todo => todo !== action.payload)
         };
+        console.log("REMOVE_TODO after", newState);
+        return newState;
+      }
       default:
         return state;
     }
   };
-  // create store
-  const store = createStore(reducer);
-  return store;
+  return reducer;
 })();
+
+// create store
+const store = createStore(combineReducers({ todo: todoReducer }));
+console.log("## create store", store);
 
 // subscribe callback 1
 var fn1 = state => {
@@ -43,32 +51,32 @@ var fn2 = state => {
 };
 
 // subscribe callbacks
-todoStore.subscribe(fn1);
-todoStore.subscribe(fn2);
+store.subscribe(fn1);
+store.subscribe(fn2);
 
 // dispatch add todo
-todoStore.dispatch({
+store.dispatch({
   type: ADD_TODO,
   payload: "a"
 });
 
 // dispatch add todo
-todoStore.dispatch({
+store.dispatch({
   type: ADD_TODO,
   payload: "b"
 });
 
 // unsubscribe callback 1
-todoStore.unsubscribe(fn1);
+store.unsubscribe(fn1);
 
 // dispatch add todo
-todoStore.dispatch({
+store.dispatch({
   type: ADD_TODO,
   payload: "c"
 });
 
 // dispatch remove todo
-todoStore.dispatch({
+store.dispatch({
   type: REMOVE_TODO,
   payload: "a"
 });

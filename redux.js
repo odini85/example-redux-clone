@@ -40,6 +40,22 @@ class Redux {
   }
 }
 
+function combineReducers(reducers) {
+  const mergeReducer = {};
+  for (let key in reducers) {
+    mergeReducer[key] = reducers[key];
+  }
+
+  return function(state = {}, action) {
+    console.log("##", mergeReducer);
+    console.log("combine state", state);
+    for (let key in mergeReducer) {
+      state[key] = mergeReducer[key](state[key], action);
+    }
+    return state;
+  };
+}
+
 // 스토어 생성
 function createStore(reducer) {
   if (typeof reducer === "function") {
