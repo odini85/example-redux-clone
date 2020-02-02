@@ -6,7 +6,7 @@ class Redux {
   __init(reducer) {
     if (typeof reducer === "function") {
       this.__reducer = reducer;
-      this.__state = reducer(undefined, "reducer init!!");
+      this.__state = reducer(undefined, "");
     }
   }
   // 상태
@@ -40,15 +40,16 @@ class Redux {
   }
 }
 
-function combineReducers(reducers) {
+// 리듀서 병합
+export function combineReducers(reducers) {
   const mergeReducer = {};
   for (let key in reducers) {
     mergeReducer[key] = reducers[key];
   }
-
   return function(state = {}, action) {
-    console.log("##", mergeReducer);
-    console.log("combine state", state);
+    if (action !== "") {
+      console.warn(action);
+    }
     for (let key in mergeReducer) {
       state[key] = mergeReducer[key](state[key], action);
     }
@@ -57,7 +58,7 @@ function combineReducers(reducers) {
 }
 
 // 스토어 생성
-function createStore(reducer) {
+export function createStore(reducer) {
   if (typeof reducer === "function") {
     return new Redux(reducer);
   }

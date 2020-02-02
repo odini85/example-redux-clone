@@ -1,0 +1,26 @@
+{
+  "name": "example-redux-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html -d build --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odini85/example-redux-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/odini85/example-redux-clone/issues"
+  },
+  "homepage": "https://github.com/odini85/example-redux-clone#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
+  }
+}

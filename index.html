@@ -5,8 +5,136 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>redux</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="./redux.js"></script>
     <script src="./main.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        padding: 20px;
+      }
+      /* counter */
+      .counter-container {
+        padding: 2em;
+        border: 1px solid #ddd;
+      }
+      .counter-container h2 {
+        margin: 0;
+      }
+      .counter-container .count {
+        margin: 20px 0 0;
+        font-size: 20px;
+      }
+      .counter-container .controls {
+        margin: 20px 0 0;
+        padding: 10px 0 0;
+        display: flex;
+        border-top: 1px solid #555;
+      }
+      .counter-container .controls button {
+        height: 30px;
+        line-height: 30px;
+        margin: 0 10px 0 0;
+        padding: 0 2em;
+      }
+      /* todo container */
+      .todo-container {
+        margin: 20px 0 0;
+        padding: 2em;
+        border: 1px solid #ddd;
+      }
+      .todo-container h2 {
+        margin: 0;
+      }
+      .todo-container .form {
+        margin: 10px 0 0;
+        display: flex;
+      }
+      .todo-container .form .input {
+        flex: 1;
+        height: 32px;
+        margin: 0 5px 0 0;
+        line-height: 32px;
+      }
+      .todo-container .form .btn-regist {
+        height: 32px;
+        padding: 0 2em;
+        line-height: 32px;
+      }
+      .todo-container .list {
+        margin: 10px 0 0;
+        padding: 0 0 0 10px;
+      }
+      .todo-container .list li {
+        display: flex;
+        margin: 0 0 5px;
+      }
+      .todo-container .list li.is--completed .text {
+        text-decoration: line-through;
+        color: #aaa;
+      }
+      .todo-container .list .text {
+        flex: 1;
+      }
+      .todo-container .list button {
+        height: 24px;
+        line-height: 24px;
+        padding: 0 1em;
+      }
+      .todo-container .footer-controls {
+        margin: 20px 0 0;
+        padding: 10px 0 0;
+        display: flex;
+        border-top: 1px solid #555;
+      }
+      .todo-container .footer-controls button {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 2em;
+      }
+      .todo-container .footer-controls button.is--active {
+        font-weight: bold;
+        color: #fff;
+        background: #000;
+      }
+      .todo-container .footer-controls .group-left {
+        flex: 1;
+      }
+      .todo-container .footer-controls .group-right {
+        flex: 1;
+        text-align: right;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div id="counter" class="counter-container">
+      <h2>counter</h2>
+      <p class="count">
+        <string id="count"></string>
+      </p>
+      <div class="controls">
+        <button type="button" id="counter-increase">+</button>
+        <button type="button" id="counter-decrease">-</button>
+      </div>
+    </div>
+    <hr />
+
+    <div id="todos" class="todo-container">
+      <h2>todo list <span id="todo-count"></span></h2>
+      <form id="todos-form" class="form">
+        <input type="text" id="todos-input" class="input" />
+        <button type="submit" class="btn-regist">등록</button>
+      </form>
+      <ul id="todos-list" class="list"></ul>
+      <div class="footer-controls">
+        <div class="group-left">
+          <button type="button" id="todos-filter-all">전체</button>
+          <button type="button" id="todos-filter-completed">완료된것</button>
+        </div>
+        <div class="group-right">
+          <button type="button" id="todos-filter-clear">모두제거</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
