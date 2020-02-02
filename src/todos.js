@@ -11,6 +11,7 @@ class Todos {
   constructor(store) {
     this.store = store;
     this.store.subscribe(this.stateChange);
+    this.prevState = this.store.getState();
   }
   init = () => {
     this.bindEvent();
@@ -19,11 +20,21 @@ class Todos {
   stateChange = () => {
     this.renderFilter();
     this.renderList();
+    this.prevState = this.store.getState();
   };
   renderFilter = () => {
     const {
       todos: { filter }
     } = this.store.getState();
+
+    const isCancelRender = (() => {
+      return this.prevState.todos.filter === filter;
+    })();
+
+    if (isCancelRender) {
+      return;
+    }
+
     const $filterAll = document.querySelector("#todos-filter-all");
     const $filterComplete = document.querySelector("#todos-filter-completed");
     if (filter.type === "all") {
@@ -38,6 +49,17 @@ class Todos {
     const {
       todos: { list, filter }
     } = this.store.getState();
+
+    const isCancelRender = (() => {
+      return (
+        this.prevState.todos.list === list &&
+        this.prevState.todos.filter === filter
+      );
+    })();
+
+    if (isCancelRender) {
+      return;
+    }
 
     let filterList = list;
     if (filter.type === "completed") {

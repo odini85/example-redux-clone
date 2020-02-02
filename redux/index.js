@@ -47,6 +47,7 @@ export function combineReducers(reducers) {
     mergeReducer[key] = reducers[key];
   }
   return function(state = {}, action) {
+    state = { ...state };
     if (action !== "") {
       console.warn(action);
     }
