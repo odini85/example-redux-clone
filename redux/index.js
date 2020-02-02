@@ -35,6 +35,7 @@ class Redux {
   }
   // 상태 변이
   dispatch(action) {
+    console.warn(action);
     this.__state = this.__reducer(this.getState(), action);
     this.__notify();
   }
@@ -48,9 +49,6 @@ export function combineReducers(reducers) {
   }
   return function(state = {}, action) {
     state = { ...state };
-    if (action !== "") {
-      console.warn(action);
-    }
     for (let key in mergeReducer) {
       state[key] = mergeReducer[key](state[key], action);
     }
